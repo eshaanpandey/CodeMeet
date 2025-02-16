@@ -1,9 +1,36 @@
-function App() {
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { useSelector } from "react-redux";
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+import Profile from "./pages/Profile";
+
+const App = () => {
+  const user = useSelector((state) => state.auth.user);
+
   return (
-    <div>
-      <h1 className="flex justify-center">Hello</h1>
-    </div>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/login"
+          element={!user ? <LoginPage /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/signup"
+          element={!user ? <SignupPage /> : <Navigate to="/" />}
+        />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
