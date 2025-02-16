@@ -32,7 +32,8 @@ export const { loginSuccess, logout } = authSlice.actions;
 
 export const loginUser = async (email, password, dispatch) => {
   try {
-    const res = await axios.post("http://localhost:8080/api/auth/login", {
+    // const res = await axios.post("http://localhost:8080/api/auth/login", {
+    const res = await axios.post("https://codemeet-zzlo.onrender.com/api/auth/login", {
       email,
       password,
     });
