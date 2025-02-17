@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/gofiber/contrib/websocket"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
@@ -26,13 +27,21 @@ func main() {
 	app := fiber.New()
 
 	app.Use(cors.New(cors.Config{
-		AllowOrigins: "http://localhost:5173", // Adjust this if your frontend is running on a different port
+		AllowOrigins: "http://localhost:5173", 
 		AllowHeaders: "Origin, Content-Type, Accept, Authorization",
 		AllowMethods: "GET, POST, PUT, DELETE, OPTIONS",
 	}))
 
-	// Setup Routes
+	app.Use("/ws/", func(c *fiber.Ctx) error {
+		if websocket.IsWebSocketUpgrade(c) {
+			return c.Next()
+		}
+		return fiber.ErrUpgradeRequired
+	})
+
 	routes.SetupAuthRoutes(app)
+	routes.SetupCodeRoutes(app)
+	routes.SetupRoomRoutes(app)
 
 	// Get port from .env or use default
 	port := os.Getenv("PORT")

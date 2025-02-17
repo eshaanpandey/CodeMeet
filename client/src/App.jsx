@@ -10,6 +10,8 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import Profile from "./pages/Profile";
+import Room from "./pages/Room";
+import SetupRoom from "./pages/SetupRoom";
 
 const App = () => {
   const user = useSelector((state) => state.auth.user);
@@ -28,6 +30,8 @@ const App = () => {
           element={!user ? <SignupPage /> : <Navigate to="/" />}
         />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/setup-room" element={<SetupRoom />} />
+        <Route path="/room/:roomID" element={<Room />} />
       </Routes>
     </Router>
   );

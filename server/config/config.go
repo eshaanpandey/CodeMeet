@@ -28,3 +28,7 @@ func ConnectDB() {
 	DB = client.Database("codemeet")
 	fmt.Println("Connected to MongoDB")
 }
+
+func GetCollection(name string) *mongo.Collection {
+	return DB.Collection(name)
+}

@@ -16,11 +16,20 @@ const Navbar = () => {
         CodeMeet
       </Link>
       <div className="flex items-center space-x-4">
+        {/* Home */}
         <Link
           to="/"
           className="px-4 py-2 text-gray-300 hover:text-white transition"
         >
           Home
+        </Link>
+
+        {/* Room */}
+        <Link
+          to="/setup-room"
+          className="px-4 py-2 text-gray-300 hover:text-white transition"
+        >
+          Room
         </Link>
         {user ? (
           <>
