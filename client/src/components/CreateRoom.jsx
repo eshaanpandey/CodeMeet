@@ -1,20 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import BASE_URL from "../utils/config";
 
 const CreateRoom = () => {
   const [roomId, setRoomId] = useState("");
   const navigate = useNavigate();
 
   const createRoom = async () => {
-    // const response = await fetch("http://localhost:8080/create-room", {
-    //   method: "POST",
-    // });
-    const response = await fetch(
-      "https://codemeet-zzlo.onrender.com/create-room",
-      {
-        method: "POST",
-      }
-    );
+    const response = await fetch(`${BASE_URL}/create-room`, {
+      method: "POST",
+    });
     const data = await response.json();
     navigate(`/room/${data.room_id}`);
   };

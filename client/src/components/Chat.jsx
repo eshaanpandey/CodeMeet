@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import BASE_URL from "../utils/config";
 
 const Chat = ({ roomId, username }) => {
   const [messages, setMessages] = useState([]);
@@ -7,13 +8,20 @@ const Chat = ({ roomId, username }) => {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    // const socket = new WebSocket(
-    //   `ws://localhost:8080/ws/chat/${roomId}?username=${username}`
-    // );
-
     const socket = new WebSocket(
-      `wss:/codemeet-zzlo.onrender.com/ws/chat/${roomId}?username=${username}`
+      `${BASE_URL.replace(
+        "https",
+        "wss"
+      )}/ws/chat/${roomId}?username=${username}`
     );
+
+    // Fetch previous chat messages from MongoDB when component mounts
+    fetch(`${BASE_URL}/api/chat/${roomId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch(setMessages({ roomId, messages: data.messages }));
+      })
+      .catch((err) => console.error("Error fetching chat history:", err));
 
     socket.onmessage = (event) => {
       const receivedMessage = JSON.parse(event.data);
