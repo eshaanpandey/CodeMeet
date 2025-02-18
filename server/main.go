@@ -11,6 +11,7 @@ import (
 	"github.com/joho/godotenv"
 
 	"server/config"
+	"server/controllers"
 	"server/routes"
 )
 
@@ -38,6 +39,9 @@ func main() {
 		}
 		return fiber.ErrUpgradeRequired
 	})
+
+	// app.Get("/ws/video/:roomID", websocket.New(controllers.VideoCallHandler))
+	app.Get("/ws/chat/:roomID", websocket.New(controllers.ChatHandler))
 
 	routes.SetupAuthRoutes(app)
 	routes.SetupCodeRoutes(app)

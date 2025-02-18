@@ -12,7 +12,8 @@ const SignupPage = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8080/api/auth/signup", {
+      // await axios.post("http://localhost:8080/api/auth/signup", {
+      await axios.post("https://codemeet-zzlo.onrender.com/api/auth/signup", {
         username,
         email,
         password,
