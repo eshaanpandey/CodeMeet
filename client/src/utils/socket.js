@@ -1,7 +1,8 @@
+import BASE_URL from "./config";
+
 export default function socket(roomID, username) {
-  //   const ws = new WebSocket(`ws://localhost:8080/ws/code/${roomID}`);
   const ws = new WebSocket(
-    `wss://codemeet-zzlo.onrender.com/ws/code/${roomID}`
+    `${BASE_URL.replace("https", "wss")}/ws/code/${roomID}`
   );
 
   ws.onopen = () => {

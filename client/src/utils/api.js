@@ -1,8 +1,8 @@
 import axios from "axios";
+import BASE_URL from "./config";
 
 const API = axios.create({
-  //   baseURL: "http://localhost:8080/api",
-  baseURL: "https://codemeet-zzlo.onrender.com/api",
+  baseURL: `${BASE_URL}/api`,
 });
 
 API.interceptors.request.use((req) => {
