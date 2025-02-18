@@ -33,7 +33,7 @@ const Chat = ({ roomId, username }) => {
     if (ws && message.trim() !== "") {
       const msg = { username, message };
       ws.send(JSON.stringify(msg));
-      setMessages((prev) => [...prev, msg]);
+      //   setMessages((prev) => [...prev, msg]);
       setMessage("");
     }
   };
