@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -20,12 +21,15 @@ const HomePage = () => {
           The ultimate platform for seamless real-time collaboration, video
           meetings, and live code editing.
         </p>
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          className="mt-6 px-6 py-3 rounded-lg text-lg font-semibold bg-purple-600 hover:bg-purple-700 transition-all shadow-lg"
-        >
-          Get Started
-        </motion.button>
+        {/* <Link to="/setup-room" className="block">
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            className="mt-6 px-6 py-3 rounded-lg text-lg font-semibold bg-purple-600 hover:bg-purple-700 transition-all shadow-lg"
+            style={{ display: 'inline-block' }}  // Ensure it behaves like a button
+          >
+            Get Started
+          </motion.button>
+        </Link> */}
       </motion.div>
 
       {/* Features Section */}

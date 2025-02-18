@@ -8,7 +8,7 @@ const Navbar = () => {
   const user = useSelector((state) => state.auth.user);
 
   return (
-    <nav className="bg-gray-900 p-4 text-white flex justify-between items-center shadow-lg backdrop-blur-md">
+    <nav className="bg-gray-900 p-4 relative z-50 text-white flex justify-between items-center shadow-lg backdrop-blur-md">
       <Link
         to="/"
         className="text-2xl font-extrabold tracking-wider text-blue-400 hover:text-blue-500 transition"
