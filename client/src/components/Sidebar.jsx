@@ -20,15 +20,6 @@ const Sidebar = ({ setActiveTab, roomId }) => {
 
   return (
     <div className="w-1/6 bg-gray-900 text-white p-4 h-full flex flex-col">
-      <h2 className="text-lg font-bold mb-2">Active Users</h2>
-      <ul className="mb-4">
-        {members.map((user, index) => (
-          <li key={index} className="text-sm text-gray-300 p-1">
-            🟢 {user}
-          </li>
-        ))}
-      </ul>
-
       <button
         onClick={() => setActiveTab("code")}
         className="p-3 hover:bg-gray-700"
@@ -48,11 +39,17 @@ const Sidebar = ({ setActiveTab, roomId }) => {
         Chat
       </button>
       <button
+        onClick={() => setActiveTab("users")}
+        className="p-3 hover:bg-gray-700"
+      >
+        Users
+      </button>
+      {/* <button
         onClick={() => setActiveTab("screen")}
         className="p-3 hover:bg-gray-700"
       >
         Screen Share
-      </button>
+      </button> */}
     </div>
   );
 };
