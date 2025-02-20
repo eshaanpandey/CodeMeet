@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import BASE_URL from "../utils/config";
 
 const SetupRoom = () => {
   const [roomID, setRoomID] = useState("");
@@ -8,16 +9,12 @@ const SetupRoom = () => {
 
   const createRoom = async () => {
     try {
-      const res = await fetch(
-        "https://codemeet-zzlo.onrender.com/create-room",
-        {
-          //   const res = await fetch("http://localhost:8080/create-room", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await fetch(`${BASE_URL}/create-room`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = await res.json();
 
       if (data.room_id) {
@@ -38,10 +35,7 @@ const SetupRoom = () => {
     }
 
     try {
-      const res = await fetch(
-        `https://codemeet-zzlo.onrender.com/join-room/${roomID}`
-      );
-      //   const res = await fetch(`http://localhost:8080/join-room/${roomID}`);
+      const res = await fetch(`${BASE_URL}/join-room/${roomID}`);
       const data = await res.json();
 
       if (data.error) {

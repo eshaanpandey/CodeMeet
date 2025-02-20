@@ -14,7 +14,7 @@ import (
 var (
 	rooms       = make(map[string]map[*websocket.Conn]bool)
 	roomClients = make(map[string]map[*websocket.Conn]string)
-	mutex       = sync.Mutex{}
+	codeMutex       = sync.Mutex{}
 )
 
 // WebSocket handler for code synchronization
@@ -22,12 +22,12 @@ func CodeEditorHandler(c *websocket.Conn) {
 	roomID := c.Params("roomID")
 
 	// Register the new client in the room
-	mutex.Lock()
+	codeMutex.Lock()
 	if _, exists := roomClients[roomID]; !exists {
 		roomClients[roomID] = make(map[*websocket.Conn]string)
 	}
 	roomClients[roomID][c] = "Anonymous"
-	mutex.Unlock()
+	codeMutex.Unlock()
 
 	defer removeClientFromRoom(roomID, c)
 
@@ -41,23 +41,23 @@ func CodeEditorHandler(c *websocket.Conn) {
 		fmt.Printf("Received message: %+v\n", msg)
 
 		// Broadcast message to other clients in the room
-		broadcastMessage(roomID, msg, c)
+		broadcastCodeMessage(roomID, msg, c)
 	}
 }
 
 // Removes a client from the room and closes the connection
 func removeClientFromRoom(roomID string, c *websocket.Conn) {
-	mutex.Lock()
-	defer mutex.Unlock()
+	codeMutex.Lock()
+	defer codeMutex.Unlock()
 
 	delete(roomClients[roomID], c)
 	c.Close()
 }
 
 // Broadcasts a message to all other clients in the room except the sender
-func broadcastMessage(roomID string, msg models.CodeSync, sender *websocket.Conn) {
-	mutex.Lock()
-	defer mutex.Unlock()
+func broadcastCodeMessage(roomID string, msg models.CodeSync, sender *websocket.Conn) {
+	codeMutex.Lock()
+	defer codeMutex.Unlock()
 
 	for conn := range roomClients[roomID] {
 		if conn != sender {

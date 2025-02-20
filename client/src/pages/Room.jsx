@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import CodeEditor from "../components/CodeEditor";
-// import VideoCall from "../components/VideoCall";
+import VideoCall from "../components/VideoCall";
 import Chat from "../components/Chat";
 
 const Room = () => {
@@ -22,7 +22,9 @@ const Room = () => {
         <CodeEditor roomId={roomID} username={username} />
       )}
 
-      {/* {activeTab === "video" && <VideoCall roomId={roomID} />} */}
+      {activeTab === "video" && (
+        <VideoCall roomId={roomID} username={username} />
+      )}
 
       {activeTab === "chat" && <Chat roomId={roomID} username={username} />}
 

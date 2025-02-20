@@ -40,8 +40,8 @@ func main() {
 		return fiber.ErrUpgradeRequired
 	})
 
-	// app.Get("/ws/video/:roomID", websocket.New(controllers.VideoCallHandler))
 	app.Get("/ws/chat/:roomID", websocket.New(controllers.ChatHandler))
+	app.Use("/ws/video/:roomID", websocket.New(controllers.VideoCallHandler))
 
 	routes.SetupAuthRoutes(app)
 	routes.SetupCodeRoutes(app)
