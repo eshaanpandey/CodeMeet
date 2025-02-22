@@ -17,8 +17,10 @@ import (
 
 func main() {
 	// Load environment variables
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("Error loading .env file")
+	if os.Getenv("RENDER") == "" { // Render sets this env var in production
+		if err := godotenv.Load(); err != nil {
+			log.Println("Warning: No .env file found, using system environment variables")
+		}
 	}
 
 	// Connect to Database
