@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+
 import Sidebar from "../components/Sidebar";
 import CodeEditor from "../components/CodeEditor";
 import VideoCall from "../components/VideoCall";
 import Chat from "../components/Chat";
+import UserList from "../components/UserList";
 
 const Room = () => {
   const { roomID } = useParams();
@@ -29,7 +31,7 @@ const Room = () => {
       {activeTab === "chat" && <Chat roomId={roomID} username={username} />}
 
       {activeTab === "users" && (
-        <div className="p-4 text-white">User List View</div>
+        <UserList roomId={roomID} username={username} />
       )}
     </div>
   );
