@@ -45,6 +45,24 @@ npm install
 npm start
 ```
 
+## Screenshots
+
+Home Page
+
+![Home](/client/public/assets/Home.png)
+
+Login Page
+
+![Login](/client/public/assets/Login.png)
+
+Join Room
+
+![JoinRoom](/client/public/assets/Join%20Room.png)
+
+Code Room
+
+![CodeRoom](/client/public/assets/Coding%20Room.png)
+
 ## 🤝 Contributing
 
 Feel free to fork the repository and submit pull requests. Contributions are welcome!
